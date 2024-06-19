@@ -1,0 +1,18 @@
+plugins {
+    id 'java' version '21'
+}
+
+group = 'com.crush'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+}
+
+test {
+    useJUnitPlatform()
+}

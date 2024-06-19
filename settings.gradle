@@ -1,0 +1,26 @@
+rootProject.name = 'crush-architecture'
+
+// 基础包
+include 'common'
+include 'util'
+include 'excel'
+include 'test'
+
+// 启动器包 适用于单体应用
+include 'starter-web'
+include 'starter-web-auth'
+include 'starter-web-page'
+include 'starter-apidoc'
+include 'starter-file'
+include 'starter-native'
+include 'starter-mysql'
+include 'starter-cache'
+include 'starter-mq'
+include 'starter-test'
+
+// cloud 包 适用于分布式服务
+include 'cloud-common'
+include 'cloud-file'
+include 'cloud-service-discovery'
+include 'cloud-circuit-breaker'
+include 'cloud-test'
