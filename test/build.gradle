@@ -16,8 +16,8 @@ repositories {
 }
 
 dependencies {
-    implementation platform('org.junit:junit-bom:$junitBom')
-    implementation 'org.junit.jupiter:junit-jupiter'
+    implementation platform("org.junit:junit-bom:$junitBom")
+    implementation "org.junit.jupiter:junit-jupiter"
 }
 
 test {
