@@ -1,3 +1,11 @@
+// 设置整个工程的插件源
+pluginManagement {
+    repositories {
+        maven { url 'https://repo.spring.io/milestone' }
+        gradlePluginPortal()
+    }
+}
+
 rootProject.name = 'crush-architecture'
 
 // 基础包
@@ -24,3 +32,5 @@ include 'cloud:cloud-file'
 include 'cloud:cloud-service-discovery'
 include 'cloud:cloud-circuit-breaker'
 include 'cloud:cloud-test'
+
+
