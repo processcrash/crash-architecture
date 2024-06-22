@@ -6,6 +6,7 @@ pluginManagement {
     }
 }
 
+// 工程名称
 rootProject.name = 'crush-architecture'
 
 // 基础包
