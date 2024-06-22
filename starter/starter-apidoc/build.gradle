@@ -2,12 +2,8 @@ plugins {
     id 'java'
 }
 
-group = 'com.crush'
-version = '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
+group = project.properties['crush.group-id'] + '.starter'
+version = project.properties['crush.version']
 
 dependencies {
 

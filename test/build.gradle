@@ -10,11 +10,6 @@ group = project.properties['crush.group-id']
 version = project.properties['crush.version']
 description = '测试包'
 
-repositories {
-    maven { url project.properties['crush.maven.repo.url'] }
-    mavenCentral()
-}
-
 dependencies {
     implementation platform("org.junit:junit-bom:$junitBom")
     implementation "org.junit.jupiter:junit-jupiter"
