@@ -2,15 +2,18 @@ plugins {
     id 'java'
 }
 
-group = 'com.crush'
-version = '1.0-SNAPSHOT'
+group = project.properties['crush.group-id']
+version = project.properties['crush.version']
+description = '测试包'
 
 repositories {
+    maven { url project.properties['crush.maven.repo.url'] }
     mavenCentral()
 }
 
 dependencies {
-
+    implementation platform('org.junit:junit-bom:5.10.0')
+    implementation 'org.junit.jupiter:junit-jupiter'
 }
 
 test {
