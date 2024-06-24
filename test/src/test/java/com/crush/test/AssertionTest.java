@@ -17,10 +17,33 @@ class AssertionTest {
     }
 
     @Test
-    public void testAssertTrue() {
+    public void testIsValWanted() {
+        var res11 = Assertion.isValWanted(true, true);
+        assertTrue(res11);
+        var res10 = Assertion.isValWanted(true, false);
+        assertFalse(res10);
+        var res01 = Assertion.isValWanted(false, true);
+        assertFalse(res01);
+        var res00 = Assertion.isValWanted(false, false);
+        assertTrue(res00);
+    }
+
+    @Test
+    public void testIsTrue() {
         Assertion.isTrue(true);
         try {
             Assertion.isTrue(false);
+        }
+        catch (Exception e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testIsFalse() {
+        Assertion.isFalse(false);
+        try {
+            Assertion.isFalse(true);
         }
         catch (Exception e) {
             assertTrue(true);
