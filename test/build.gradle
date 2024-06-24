@@ -2,16 +2,12 @@ plugins {
     id 'java'
 }
 
-ext {
-    junitBom = "5.10.0"
-}
-
-group = project.properties['crush.group-id']
+group = 'com.crush'
 version = project.properties['crush.version']
 description = '测试包'
 
 dependencies {
-    implementation platform("org.junit:junit-bom:$junitBom")
+    implementation platform("org.junit:junit-bom:$junitBomVersion")
     implementation "org.junit.jupiter:junit-jupiter"
 }
 

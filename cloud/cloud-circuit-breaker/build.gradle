@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = project.properties['crush.group-id'] + '.cloud'
+group = 'com.crush.cloud'
 version = project.properties['crush.version']
 
 dependencies {
