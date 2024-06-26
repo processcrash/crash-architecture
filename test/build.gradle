@@ -4,11 +4,10 @@ plugins {
 
 group = 'com.crush'
 version = project.properties['crush.version']
-description = '测试包'
 
 dependencies {
-    implementation platform("org.junit:junit-bom:$junitBomVersion")
-    implementation "org.junit.jupiter:junit-jupiter"
+    // 内部引用
+    implementation project(':common')
 }
 
 test {
