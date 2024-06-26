@@ -6,7 +6,8 @@ group = 'com.crush.starter'
 version = project.properties['crush.version']
 
 dependencies {
-
+    // 内部依赖
+    implementation project(':common')
 }
 
 test {

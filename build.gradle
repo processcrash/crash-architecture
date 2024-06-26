@@ -5,6 +5,11 @@ plugins {
 }
 
 allprojects {
+    // 指定JDK版本
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+    // 指定编码格式
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
     repositories {
         mavenLocal()
         maven { url 'https://maven.aliyun.com/repository/central' }
@@ -18,11 +23,6 @@ allprojects {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
-    // 指定JDK版本
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-    // 指定编码格式
-    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
     // dependencyManagement 版本统一管理
     dependencyManagement {

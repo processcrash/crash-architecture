@@ -1,34 +1,20 @@
 plugins {
     id 'java'
+    id 'io.spring.dependency-management'
 }
 
 group = 'com.crush'
 version = project.properties['crush.version']
 
 dependencies {
-    implementation "commons-beanutils:commons-beanutils"
-//    implementation "commons-codec:commons-codec"
-//    implementation "commons-collections:commons-collections"
-//    implementation "commons-compress:commons-compress"
-//    implementation "commons-configuration:commons-configuration"
-//    implementation "commons-csv:commons-csv"
-//    implementation "commons-daemon:commons-daemon"
-//    implementation "commons-dbcp:commons-dbcp"
-//    implementation "commons-dbutils:commons-dbutils"
-//    implementation "commons-digester:commons-digester"
-//    implementation "commons-email:commons-email"
-//    implementation "commons-exec:commons-exec"
-//    implementation "commons-fileupload:commons-fileupload"
-//    implementation "commons-io:commons-io"
-//    implementation "commons-jci:commons-jci"
-//    implementation "commons-lang3:commons-lang3"
-//    implementation "commons-logging:commons-logging"
-//    implementation "commons-math:commons-math"
-//    implementation "commons-net:commons-net"
-//    implementation "commons-pool:commons-pool"
-//    implementation "commons-primitives:commons-primitives"
-//    implementation "commons-validator:commons-validator"
-//    lombok
+    implementation "commons-pool:commons-pool"
+    implementation "commons-codec:commons-codec"
+    implementation "org.apache.commons:commons-dbcp2"
+    implementation "org.apache.commons:commons-lang3"
+    implementation 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'ch.qos.logback:logback-core'
+    implementation 'ch.qos.logback:logback-classic'
 }
 
 test {
