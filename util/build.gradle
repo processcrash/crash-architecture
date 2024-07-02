@@ -9,8 +9,8 @@ dependencies {
     // 内部引用
     implementation project(':common')
 
-    implementation 'ch.qos.logback:logback-core'
-    implementation 'ch.qos.logback:logback-classic'
+    compileOnly 'ch.qos.logback:logback-core'
+    compileOnly 'ch.qos.logback:logback-classic'
 }
 
 test {
