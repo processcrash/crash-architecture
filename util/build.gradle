@@ -12,6 +12,9 @@ dependencies {
     // 仅用作编译
     compileOnly 'ch.qos.logback:logback-core'
     compileOnly 'ch.qos.logback:logback-classic'
+
+    implementation 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 test {
