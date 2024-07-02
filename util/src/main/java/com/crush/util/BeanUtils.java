@@ -2,6 +2,7 @@ package com.crush.util;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 /**
@@ -59,7 +60,7 @@ public class BeanUtils {
                     props.add(fs[i].getName());
             }
             for (String key : props)
-                map.put(key, ReflectUtil.forceGetProperty(src, key));
+                map.put(key, ReflectionUtils.forceGetProperty(src, key));
             return map;
         }
         catch (Exception e) {

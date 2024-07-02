@@ -8,6 +8,9 @@ version = project.properties['crush.version']
 dependencies {
     // 内部引用
     implementation project(':common')
+
+    implementation 'ch.qos.logback:logback-core'
+    implementation 'ch.qos.logback:logback-classic'
 }
 
 test {

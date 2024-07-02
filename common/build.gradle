@@ -18,10 +18,6 @@ dependencies {
     implementation 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    // logback 依赖
-    implementation 'ch.qos.logback:logback-core'
-    implementation 'ch.qos.logback:logback-classic'
-
 }
 
 test {

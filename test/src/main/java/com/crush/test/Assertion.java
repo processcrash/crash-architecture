@@ -4,7 +4,7 @@ package com.crush.test;
  * 断言测试类
  *
  * @author zhangxq
- * @date 2024/6/22
+ * @since 2024/6/22
  */
 public class Assertion {
 
