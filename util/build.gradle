@@ -9,6 +9,7 @@ dependencies {
     // 内部引用
     implementation project(':common')
 
+    // 仅用作编译
     compileOnly 'ch.qos.logback:logback-core'
     compileOnly 'ch.qos.logback:logback-classic'
 }

@@ -8,6 +8,9 @@ version = project.properties['crush.version']
 dependencies {
     // 内部引用
     implementation project(':common')
+
+    // 测试依赖
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 test {
