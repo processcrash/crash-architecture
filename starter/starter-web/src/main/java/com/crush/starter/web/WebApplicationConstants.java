@@ -1,7 +1,7 @@
 package com.crush.starter.web;
 
 /**
- * @author will
+ * @author zhangxq
  * @since 2024/6/26
  */
 public class WebApplicationConstants {
