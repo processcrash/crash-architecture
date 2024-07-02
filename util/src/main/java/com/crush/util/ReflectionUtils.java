@@ -16,13 +16,12 @@ import java.util.Map;
  */
 @Slf4j
 public class ReflectionUtils {
-    
+
     public static Object getFieldValue(Object object, String propertyName) {
         try {
-            if (object == null)
-                return null;
+            if (object == null) return null;
             if (object instanceof Map) {
-                Map<String, Object> map = (Map<String, Object>)object;
+                Map<String, Object> map = (Map<String, Object>) object;
                 return map.get(propertyName);
             }
             Field field = getDeclaredField(object, propertyName);
@@ -31,20 +30,22 @@ public class ReflectionUtils {
             Object result = null;
             try {
                 result = field.get(object);
-            } catch (IllegalAccessException illegalAccessException) {}
+            }
+            catch (IllegalAccessException illegalAccessException) {
+            }
             field.setAccessible(accessible);
             return result;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new RuntimeException("", e);
         }
     }
-    
+
     public static void setFieldValue(Object object, String propertyName, Object newValue) {
         try {
-            if (object == null)
-                return;
+            if (object == null) return;
             if (object instanceof Map) {
-                Map<String, Object> map = (Map<String, Object>)object;
+                Map<String, Object> map = (Map<String, Object>) object;
                 map.put(propertyName, newValue);
                 return;
             }
@@ -53,26 +54,31 @@ public class ReflectionUtils {
             field.setAccessible(true);
             try {
                 field.set(object, newValue);
-            } catch (IllegalAccessException illegalAccessException) {}
+            }
+            catch (IllegalAccessException illegalAccessException) {
+            }
             field.setAccessible(accessible);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new RuntimeException("", e);
         }
     }
-    
+
     public static Field getDeclaredField(Object object, String propertyName) throws NoSuchFieldException {
         return getDeclaredField(object.getClass(), propertyName);
     }
-    
+
     private static Field getDeclaredField(Class<Object> clazz, String propertyName) throws NoSuchFieldException {
-        for (Class<Object> superClass = clazz; superClass != Object.class; superClass = (Class)superClass.getSuperclass()) {
+        for (Class<Object> superClass = clazz; superClass != Object.class; superClass = (Class) superClass.getSuperclass()) {
             try {
                 return superClass.getDeclaredField(propertyName);
-            } catch (NoSuchFieldException noSuchFieldException) {}
+            }
+            catch (NoSuchFieldException noSuchFieldException) {
+            }
         }
         throw new NoSuchFieldException("No such field: " + clazz.getName() + '.' + propertyName);
     }
-    
+
     public static Object invokePrivateMethod(Object object, String methodName, Object[] params) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         Class[] types = new Class[params.length];
         for (int i = 0; i < params.length; i++)
@@ -81,11 +87,11 @@ public class ReflectionUtils {
         method.setAccessible(true);
         return method.invoke(object, params);
     }
-    
+
     public static Object invokePrivateMethod(Object object, String methodName, Object param) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        return invokePrivateMethod(object, methodName, new Object[] { param });
+        return invokePrivateMethod(object, methodName, new Object[]{param});
     }
-    
+
     public static String fieldsToString(Object obj) {
         int levels = 0;
         Class<?> sourceClass = obj.getClass();
@@ -96,7 +102,7 @@ public class ReflectionUtils {
         levels--;
         return p_fieldsToString(obj, levels);
     }
-    
+
     private static String p_fieldsToString(Object obj, int superLevels) {
         String[] results = new String[superLevels + 1];
         StringBuffer result = new StringBuffer();
@@ -110,15 +116,13 @@ public class ReflectionUtils {
                     if (!Modifier.isStatic(modifier)) {
                         f.setAccessible(true);
                         String name = f.getName();
-                        if (name.indexOf("m_") == 0)
-                            name = name.substring(2);
+                        if (name.indexOf("m_") == 0) name = name.substring(2);
                         Object tempObject = f.get(obj);
                         result.append(name);
                         result.append("[");
                         result.append(tempObject);
                         result.append("]");
-                        if (j < fields.length - 1)
-                            result.append(",");
+                        if (j < fields.length - 1) result.append(",");
                         result.append(" ");
                     }
                 }
@@ -128,22 +132,24 @@ public class ReflectionUtils {
             }
             for (int i = 0; i <= superLevels; i++)
                 result.append(results[i]);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             log.error("ReflectUtil: Problem reflecting fields", ex);
         }
         return result.toString();
     }
-    
+
     public static Object forceGetProperty(Object src, String key) {
         Object o = new Object();
         try {
             Field declaredField = src.getClass().getDeclaredField(key);
             declaredField.setAccessible(true);
             o = declaredField.get(src);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
         return o;
     }
-    
+
 }
