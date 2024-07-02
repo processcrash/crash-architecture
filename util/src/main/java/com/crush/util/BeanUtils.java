@@ -2,7 +2,6 @@ package com.crush.util;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.Field;
 import java.util.*;
 
 /**
@@ -11,13 +10,21 @@ import java.util.*;
  */
 @Slf4j
 public class BeanUtils {
-    
-    public static <T> T copy(Object src, Class<T> clazz) {
+
+    /**
+     * 根据源对象复制一个目标对象的实例
+     *
+     * @param source 源对象
+     * @param targetClass 目标对象 class
+     * @return 目标对象 class 的实例
+     * @param <T> 目标对象类型
+     */
+    public static <T> T copy(Object source, Class<T> targetClass) {
         T t = null;
         try {
-            if (src != null) {
-                t = clazz.newInstance();
-                BeanUtils.copyProperties(src, t);
+            if (source != null) {
+                t = targetClass.newInstance();
+                BeanUtils.copyProperties(source, t);
             }
         }
         catch (Exception e) {
@@ -25,42 +32,64 @@ public class BeanUtils {
         }
         return t;
     }
-    
-    public static <T> List<T> copyList(List<?> src, Class<T> clazz) {
-        if (src != null) {
+
+    /**
+     * 根据源对象 List 数组复制一个目标对象 List 数组，返回的类型为 ArrayList
+     *
+     * @param sourceList 源对象数组
+     * @param targetClass 目标对象 class
+     * @return 目标对象 List 实例，类型为 ArrayList
+     * @param <T> 目标对象类型
+     */
+    public static <T> List<T> copyList(List<?> sourceList, Class<T> targetClass) {
+        if (sourceList != null) {
             List<T> list = new ArrayList<>();
-            for (Object obj : src) {
-                T t = copy(obj, clazz);
+            for (Object obj : sourceList) {
+                T t = copy(obj, targetClass);
                 list.add(t);
             }
             return list;
         }
         return new ArrayList<>();
     }
-    
-    public static void copy(Object src, Object to) {
-        if (src == null || to == null) return;
+
+    /**
+     * 对象拷贝
+     *
+     * @param source 源对象
+     * @param target 目标对象
+     */
+    public static void copy(Object source, Object target) {
+        if (source == null || target  == null) return;
         try {
-            BeanUtils.copyProperties(src, to);
+            BeanUtils.copyProperties(source, target );
         }
         catch (Exception e) {
             log.error("copy object error", e);
         }
     }
-    
-    public static Map<String, Object> getObjectMapProperties(Object src) {
-        if (src == null) return null;
-        Map<String, Object> map = new HashMap<>();
+
+    /**
+     * 将 Object 对象将内部的字段转换成 Map 类型
+     *
+     * @param obj 实体对象
+     * @return HasMap
+     */
+    public static Map<String, Object> objectToMap(Object obj) {
+        if (obj == null) return null;
+        var map = new HashMap<String, Object>();
         try {
-            Class<?> clazz = src.getClass();
-            Set<String> props = new HashSet<>();
-            for (Class<?> superClass = clazz; superClass != Object.class; superClass = superClass.getSuperclass()) {
-                Field[] fs = clazz.getDeclaredFields();
-                for (int i = 0; i < fs.length; i++)
-                    props.add(fs[i].getName());
+            var clazz = obj.getClass();
+            var props = new HashSet<String>();
+            for (var superClass = clazz; superClass != Object.class; superClass = superClass.getSuperclass()) {
+                var fs = clazz.getDeclaredFields();
+                for (var f : fs) {
+                    props.add(f.getName());
+                }
             }
-            for (String key : props)
-                map.put(key, ReflectionUtils.forceGetProperty(src, key));
+            for (var key : props) {
+                map.put(key, ReflectionUtils.forceGetProperty(obj, key));
+            }
             return map;
         }
         catch (Exception e) {
@@ -68,23 +97,37 @@ public class BeanUtils {
             return map;
         }
     }
-    
+
+    /**
+     * 将源对象中的值复制到目标对象
+     *
+     * @param source 源对象
+     * @param target 目标对象
+     */
     public static void copyProperties(Object source, Object target) {
-        BeanUtils.copyProperties(source, target);
+        // BeanUtils.copyProperties(source, target);
     }
-    
-    public static <T, V> List<V> copyPropertieses(List<T> sourceList, List<V> targetList, Class<?> clasz) {
-        if (sourceList != null && sourceList.size() >= 1) {
+
+    /**
+     * 将源类型的 List 复制成目标类型的 List
+     *
+     * @param sourceList 源类型 List
+     * @param targetList 目标类型 List
+     * @param tergetClass 目标类型 class
+     * @return 目标类型 List 实体
+     * @param <T> 源类型
+     * @param <V> 目标类型
+     */
+    public static <T, V> List<V> copyList(List<T> sourceList, List<V> targetList, Class<?> tergetClass) {
+        if (sourceList != null && !sourceList.isEmpty()) {
             for (T t : sourceList) {
                 V instance = null;
                 try {
-                    instance = (V) clasz.newInstance();
+                    instance = (V) tergetClass.newInstance();
                 }
-                catch (InstantiationException e) {
-                    e.printStackTrace();
-                }
-                catch (IllegalAccessException e) {
-                    e.printStackTrace();
+                catch (InstantiationException | IllegalAccessException e) {
+                    // e.printStackTrace();
+                    log.error("Crete instance exception!", e);
                 }
                 copyProperties(t, instance);
                 targetList.add(instance);
@@ -93,12 +136,20 @@ public class BeanUtils {
         }
         return targetList;
     }
-    
-    public static <T> Set<T> copySet(Collection<?> src, Class<T> clazz) {
-        if (src != null) {
-            Set<T> list = new HashSet<>();
-            for (Object obj : src) {
-                T t = copy(obj, clazz);
+
+    /**
+     * 将源 Set 复制到目标 Set 中
+     *
+     * @param sourceSet 源 Set 实体
+     * @param targetClass 目标 class
+     * @return 目标 Set 实体
+     * @param <T> 目标类型
+     */
+    public static <T> Set<T> copySet(Collection<?> sourceSet, Class<T> targetClass) {
+        if (sourceSet != null) {
+            var list = new HashSet<T>();
+            for (var obj : sourceSet) {
+                var t = copy(obj, targetClass);
                 list.add(t);
             }
             return list;
