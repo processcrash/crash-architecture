@@ -26,6 +26,9 @@ include 'starter:starter-mysql'
 include 'starter:starter-cache'
 include 'starter:starter-mq'
 include 'starter:starter-test'
+file("${rootDir}/starter").eachDirMatch(~/starter-.*/) {
+    include "starter:${it.name}"
+}
 
 // cloud 包 适用于分布式服务
 include 'cloud:cloud-common'
