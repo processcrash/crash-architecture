@@ -7,7 +7,7 @@ pluginManagement {
 }
 
 // 工程名称
-rootProject.name = 'crush-architecture'
+rootProject.name = 'crash-architecture'
 
 // 基础包
 include 'common'
